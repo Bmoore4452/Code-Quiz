@@ -6,23 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/style.css">
-    <title>JavaScript Code Quiz</title>
+    <title>Quiz</title>
 </head>
-
 <header>
-    <div id="high-scores">High Scores</div>
-    <div id="time-label">Time:
-        <div class="countdown">60</div>
+    <div>High Score</div>
+    <div class="timer">Timer:
+        <div id="countdown">60</div>
     </div>
 </header>
 
 <body>
     <div class="container">
-        <p id="question">Please click the button below to start the game</p>
-        <div class="buttons">
-            <button class="start-button" id="start-button">Start Game</button>
+        <div class="card">
+            <p id="question-area"></p>
         </div>
     </div>
+    <script src="./assets/quiz.js"></script>
 </body>
-<script src="/assets/quiz.js"></script>
+
 </html>

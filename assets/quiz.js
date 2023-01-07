@@ -1,40 +1,57 @@
-var startButton = document.querySelector(".start-button");
-var timerElement = document.querySelector(".countdown");
-var time;
-var countdown;
-var answers;
-var getPara = document.querySelector("#question");
-var highScores;
-var score;
-var correctAnswer = 0;
+var startScreen = [
+    {
+        instructions: 'Please click the below to start the game.',
+        button: 'Start Game'
+    }
+];
 
+var quizContent = [
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula.',
+        correct: 'Right Answer',
+        wrongOne: 'Wrong One',
+        wrongTwo: 'Wrong Two',
+        wrongThree: 'Wrong Three'
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula.',
+        correct: 'Right Answer',
+        wrongOne: 'Wrong One',
+        wrongTwo: 'Wrong Two',
+        wrongThree: 'Wrong Three'
 
-function startGame() {
-    var elem = document.getElementById("start-button");
-    elem.parentNode.removeChild(elem);
-    questionOne();
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula.',
+        correct: 'Right Answer',
+        wrongOne: 'Wrong One',
+        wrongTwo: 'Wrong Two',
+        wrongThree: 'Wrong Three'
+
+    },
+    {
+        question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula.',
+        correct: 'Right Answer',
+        wrongOne: 'Wrong One',
+        wrongTwo: 'Wrong Two',
+        wrongThree: 'Wrong Three'
+
+    },
+];
+
+var para = document.createElement('p')
+var startButton = document.createElement('button');
+
+function startGameScreen(){
+    para.innerHTML = startScreen[0].instructions;
+    document.getElementById('question-area').appendChild(para);
+    startButton.innerHTML = startScreen[0].button;
+    document.getElementById('question-area').appendChild(startButton);
 }
 
-function questionOne(){
-    document.getElementsByClassName(".start-button").innerHTML;
-    document.getElementById("question").innerHTML = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Proin non ante malesuada, varius massa sollicitudin, faucibus lacus. Donec at varius.";
-    
-}
+startGameScreen();
 
-function startTime() {
-    countdown = 60;
-    time = setInterval(function () {
-        countdown--;
-        timerElement.textContent = countdown;
-        if (countdown === 0) {
-            // Clears interval
-            clearInterval(time);
-            // countdown = 60;
-        }
-    }, 1000);
-}
-console.log(countdown);
+document.getElementsByClassName('card');
 
-startButton.addEventListener("click", startTime);
-startButton.addEventListener("click", startGame);
+var timer = document.getElementById('countdown');
 
