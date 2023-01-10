@@ -52,39 +52,49 @@ function startGame() {
 
   var btn = document.createElement("button");
   btn.textContent = startScreen[0].button;
-  //   render the first question
+  
+  // render the first question
   btn.addEventListener("click", renderQuestion);
-  //   Start the timer on first click
+
+  // Start the timer on first click
   btn.addEventListener("click", startTime);
   btn.setAttribute("id", "start-button");
   card.append(btn);
 }
 
 function renderQuestion() {
-  //    erase previous card
+  // erase previous card
   card.innerHTML = "";
 
-  //    create paragarah tag
+  // create paragarah tag
   var p = document.createElement("p");
 
-  //    add the content from the question key in the quizQuestions Object Array
+  // add the content from the question key in the quizQuestions Object Array
   p.textContent = quizQuestions[index].question;
 
-  //   append to the card
+  // append to the card
   card.append(p);
 
-  //   for loop to create, add text to, and append the buttons
+  // for loop to create, add text to, and append the buttons
   for (var i = 0; i < quizQuestions[index].answers.length; i++) {
+    // creates the button
     var btn = document.createElement("button");
+
+    // adds the text from the answers key Array
     btn.textContent = quizQuestions[index].answers[i];
+
+    // gives each button an id and data type
     btn.setAttribute("id", "button" + i);
     btn.setAttribute("data-answer", "correct" + i);
+
     var correct = document.querySelector("#button0");
+
+    // prevents loop from looking for another question after final element of the question
     btn.addEventListener("click", function () {
       if (index < quizQuestions[i].answers.length) {
         click();
       }
-      console.log(correct);
+      console.log(quizQuestions[index - 1].answers[0]);
     });
     card.append(btn);
   }
