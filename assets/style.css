@@ -35,6 +35,28 @@ p {
     font-size: 1.3em;
 }
 
+#reaction{
+    color: green;
+    font-style: italic;
+    animation: hideAnimation 0s ease-in .5s;
+    animation-fill-mode: forwards;
+}
+
+#reaction2{
+    color: rgb(226, 9, 9);
+    font-style: italic;
+    animation: hideAnimation 0s ease-in .5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hideAnimation {
+    to {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+}
+
 button {
     margin: 10px;
     gap: 1em;

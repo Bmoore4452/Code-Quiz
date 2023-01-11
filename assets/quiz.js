@@ -3,6 +3,7 @@ var clickBtn = document.getElementById("button");
 var timerElement = document.querySelector("#countdown");
 var index = 0;
 var countdown = 60;
+var count = 0;
 var startScreen = [
   {
     instructions: "Please click the below to start the game.",
@@ -87,31 +88,43 @@ function renderQuestion() {
     btn.setAttribute("id", "button" + i);
     btn.setAttribute("data-answer", "correct" + i);
 
-    var correct = document.querySelector("#button0");
-
-    function clickHandle() {
-      {
-        if (index < quizQuestions[i].answers.length) {
-          click();
-        }
-        console.log(correct);
-      }
-    }
+    // var correct = document.querySelector("#button0");
 
     // prevents loop from looking for another question after final element of the question
-    btn.removeEventListener("click", clickHandle);
-    btn.addEventListener("click", clickHandle);
+    btn.addEventListener("click", function (event) {
+      var element = event.target;
+      var correct = element.getAttribute("data-answer");
+      if (
+        correct === "correct0" &&
+        index < quizQuestions[index].answers.length
+      ) {
+        click();
+        var reaction = document.createElement("p");
+        reaction.textContent = "correct";
+        reaction.setAttribute("id", "reaction");
+        card.appendChild(reaction);
+        console.log("correct answer");
+      } else if (
+        correct !== "correct0" &&
+        index < quizQuestions[index].answers.length
+      ) {
+        countdown = countdown - 3;
+        click();
+        var reaction2 = document.createElement("p");
+        reaction2.textContent = "wrong";
+        reaction2.setAttribute("id", "reaction2");
+        card.appendChild(reaction2);
+        console.log("wrong answer");
+      }
+      if (count === 4) {
+        gameOver();
+      }
+      count++;
+      console.log(index);
+      console.log(count);
+    });
     card.append(btn);
   }
-  //   var correct = quizQuestions[index].answers[0];
-  // Sets button with id of button0 to correct and listens for click to confirm correct click
-  //   var correct = document.querySelector("#button0");
-  //   correct === "correct";
-  //   correct.addEventListener("click", function () {
-  //     if (!correct) {
-  //         countdown = countdown - 3;
-  //     }
-  //   });
 }
 
 function startTime() {
@@ -129,6 +142,29 @@ function startTime() {
 function click() {
   index++;
   renderQuestion();
+}
+
+function gameOver() {
+  clearInterval(time);
+  // erase previous card
+  card.innerHTML = "";
+
+  // create paragarah tag
+  var p = document.createElement("p");
+  var name = document.createElement("input");
+  var submit = document.createElement("button");
+  name.type = "text";
+  name.id = "name";
+
+
+  // add the content from the question key in the quizQuestions Object Array
+  p.textContent = "Game Over! Please enter your name!";
+  submit.textContent = "Submit!";
+
+  // append to the card
+  card.append(p);
+  card.appendChild(name);
+  card.append(submit);
 }
 
 startGame();
