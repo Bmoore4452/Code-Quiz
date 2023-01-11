@@ -52,7 +52,7 @@ function startGame() {
 
   var btn = document.createElement("button");
   btn.textContent = startScreen[0].button;
-  
+
   // render the first question
   btn.addEventListener("click", renderQuestion);
 
@@ -89,13 +89,18 @@ function renderQuestion() {
 
     var correct = document.querySelector("#button0");
 
-    // prevents loop from looking for another question after final element of the question
-    btn.addEventListener("click", function () {
-      if (index < quizQuestions[i].answers.length) {
-        click();
+    function clickHandle() {
+      {
+        if (index < quizQuestions[i].answers.length) {
+          click();
+        }
+        console.log(correct);
       }
-      console.log(quizQuestions[index - 1].answers[0]);
-    });
+    }
+
+    // prevents loop from looking for another question after final element of the question
+    btn.removeEventListener("click", clickHandle);
+    btn.addEventListener("click", clickHandle);
     card.append(btn);
   }
   //   var correct = quizQuestions[index].answers[0];
