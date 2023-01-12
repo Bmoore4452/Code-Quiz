@@ -44,6 +44,8 @@ var quizQuestions = [
   },
 ];
 
+highScores = [];
+
 function startGame() {
   var p = document.createElement("p");
 
