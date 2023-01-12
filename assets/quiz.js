@@ -172,7 +172,7 @@ function gameOver() {
   clearInterval(time);
   // erase previous card
   card.innerHTML = "";
-  // create paragarah tag
+  // create tags
   var p = document.createElement("p");
   var name = document.createElement("input");
   name.setAttribute("id", "name");
