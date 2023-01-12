@@ -116,7 +116,7 @@ function renderQuestion() {
         card.appendChild(reaction2);
         console.log("wrong answer");
       }
-      if (count === 4) {
+      if (count === 4 || countdown === 0) {
         gameOver();
       }
       count++;
@@ -144,27 +144,68 @@ function click() {
   renderQuestion();
 }
 
+function printScores() {
+  var highName = localStorage.getItem("name");
+  var score = localStorage.getItem("score");
+
+  var p = document.createElement("div");
+  var p2 = document.createElement("div");
+  p.setAttribute("id", "high-scores");
+  p2.setAttribute("id", "high-scores");
+  p.textContent = highName;
+  p2.textContent = score;
+
+  card.appendChild(p);
+  card.append(p2);
+}
+
+function init() {
+  card.innerHTML = "";
+  index = 0;
+  countdown = 60;
+  count = 0;
+  startGame();
+  timerElement.textContent = countdown;
+}
+
 function gameOver() {
   clearInterval(time);
   // erase previous card
   card.innerHTML = "";
-
   // create paragarah tag
   var p = document.createElement("p");
   var name = document.createElement("input");
+  name.setAttribute("id", "name");
   var submit = document.createElement("button");
+  submit.setAttribute("id", "submit");
   name.type = "text";
   name.id = "name";
-
+  var restart = document.createElement("button");
+  restart.setAttribute("id", "restart");
 
   // add the content from the question key in the quizQuestions Object Array
   p.textContent = "Game Over! Please enter your name!";
   submit.textContent = "Submit!";
+  restart.textContent = "Restart";
+
+  submit.addEventListener("click", function (event2) {
+    event2.preventDefault();
+    var highName = document.querySelector("#name").value;
+    localStorage.setItem("name", highName);
+    localStorage.setItem("score", countdown);
+    console.log(highName);
+    printScores();
+  });
+
+  restart.addEventListener("click", function (event) {
+    init();
+  });
 
   // append to the card
   card.append(p);
   card.appendChild(name);
   card.append(submit);
+  card.append(restart);
 }
 
 startGame();
