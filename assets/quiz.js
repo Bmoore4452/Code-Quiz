@@ -1,7 +1,6 @@
 var card = document.getElementById("card");
 var clickBtn = document.getElementById("button");
 var timerElement = document.querySelector("#countdown");
-var index = 0;
 var countdown = 60;
 var count = 0;
 var startScreen = [
@@ -20,6 +19,7 @@ var quizQuestions = [
       "Chicago Bulls",
       "Boston Bruins",
     ],
+    correctAnswer: "Baltimore Ravens",
   },
   {
     question: "Who won the Super Bowl last year?",
@@ -29,22 +29,26 @@ var quizQuestions = [
       "New Orleans Saints",
       "Cincinnati Bengals",
     ],
+    correctAnswer: "Los Angeles Rams",
   },
   {
     question: 'What year did the "Fat Boys" break up?',
     answers: ["1991", "2015", "1970", "2002"],
+    correctAnswer: "1991",
   },
   {
     question: '"Happy ____ , Happy Life"',
     answers: ["Wife", "Birthday", "Dog", "Kids"],
+    correctAnswer: "Wife",
   },
   {
     question: "How much was this boot camp?",
     answers: ["$10,000", "$200", "$3,000", "$4,000"],
+    correctAnswer: "$10,000",
   },
 ];
 
-highScores = [];
+var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
 
 function startGame() {
   var p = document.createElement("p");
@@ -73,59 +77,54 @@ function renderQuestion() {
   var p = document.createElement("p");
 
   // add the content from the question key in the quizQuestions Object Array
-  p.textContent = quizQuestions[index].question;
+  p.textContent = quizQuestions[count].question;
 
   // append to the card
   card.append(p);
 
   // for loop to create, add text to, and append the buttons
-  for (var i = 0; i < quizQuestions[index].answers.length; i++) {
+  for (var i = 0; i < quizQuestions[count].answers.length; i++) {
     // creates the button
     var btn = document.createElement("button");
 
     // adds the text from the answers key Array
-    btn.textContent = quizQuestions[index].answers[i];
+    btn.textContent = quizQuestions[count].answers[i];
 
     // gives each button an id and data type
     btn.setAttribute("id", "button" + i);
-    btn.setAttribute("data-answer", "correct" + i);
+    // btn.setAttribute("value", quizQuestions[index].answers[i]);
 
     // var correct = document.querySelector("#button0");
 
     // prevents loop from looking for another question after final element of the question
-    btn.addEventListener("click", function (event) {
-      var element = event.target;
-      var correct = element.getAttribute("data-answer");
-      if (
-        correct === "correct0" &&
-        index < quizQuestions[index].answers.length
-      ) {
-        click();
-        var reaction = document.createElement("p");
-        reaction.textContent = "correct";
-        reaction.setAttribute("id", "reaction");
-        card.appendChild(reaction);
-        console.log("correct answer");
-      } else if (
-        correct !== "correct0" &&
-        index < quizQuestions[index].answers.length
-      ) {
-        countdown = countdown - 3;
-        click();
-        var reaction2 = document.createElement("p");
-        reaction2.textContent = "wrong";
-        reaction2.setAttribute("id", "reaction2");
-        card.appendChild(reaction2);
-        console.log("wrong answer");
-      }
-      if (count === 4 || countdown === 0) {
-        gameOver();
-      }
-      count++;
-      console.log(index);
-      console.log(count);
-    });
+    btn.addEventListener("click", clickButton);
     card.append(btn);
+  }
+}
+
+function clickButton() {
+  if (this.textContent !== quizQuestions[count].correctAnswer) {
+    countdown -= 3;
+    timerElement.textContent = countdown;
+    // var reaction2 = document.createElement("p");
+    // reaction2.textContent = "wrong";
+    // reaction2.setAttribute("id", "reaction2");
+    // card.appendChild(reaction2);
+  }
+
+  // var reaction = document.createElement("p");
+  // reaction.textContent = "correct";
+  // reaction.setAttribute("id", "reaction");
+  // card.appendChild(reaction);
+
+  count++;
+  // console.log(index);
+  // console.log(count);
+
+  if (count === quizQuestions[count].answers.length) {
+    gameOver();
+  } else {
+    click();
   }
 }
 
@@ -142,23 +141,23 @@ function startTime() {
 }
 
 function click() {
-  index++;
   renderQuestion();
 }
 
 function printScores() {
-  var highName = localStorage.getItem("name");
-  var score = localStorage.getItem("score");
+  highScores.forEach((element) => {
+    var highScore = document.createElement("h2");
+    highScore.textContent = (`${element.name} ${element.score}`);
+    card.append(highScore);
+  });
 
-  var p = document.createElement("div");
-  var p2 = document.createElement("div");
-  p.setAttribute("id", "high-scores");
-  p2.setAttribute("id", "high-scores");
-  p.textContent = highName;
-  p2.textContent = score;
 
-  card.appendChild(p);
-  card.append(p2);
+  // for (var i = 0; i < localStorage.length; i++) {
+  //   var highName = localStorage.getItem("highscores")
+  //   // var score = localStorage[highName];
+
+  //   // highScore.innerHTML += `${score}`;
+  //   console.log(`${highName}:`);
 }
 
 function init() {
@@ -190,12 +189,18 @@ function gameOver() {
   submit.textContent = "Submit!";
   restart.textContent = "Restart";
 
-  submit.addEventListener("click", function (event2) {
-    event2.preventDefault();
+  submit.addEventListener("click", function (event) {
+    event.preventDefault();
     var highName = document.querySelector("#name").value;
-    localStorage.setItem("name", highName);
-    localStorage.setItem("score", countdown);
-    console.log(highName);
+
+    var obj = {
+      name: highName,
+      score: countdown,
+    };
+    highScores.push(obj);
+
+    localStorage.setItem("highscores", JSON.stringify(highScores));
+
     printScores();
   });
 
@@ -209,5 +214,7 @@ function gameOver() {
   card.append(submit);
   card.append(restart);
 }
+
+
 
 startGame();
