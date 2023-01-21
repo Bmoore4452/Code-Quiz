@@ -145,12 +145,11 @@ function click() {
 }
 
 function printScores() {
+  var highScore = document.createElement("h2");
   highScores.forEach((element) => {
-    var highScore = document.createElement("h2");
-    highScore.textContent = (`${element.name} ${element.score}`);
+    highScore.textContent = `${element.name} ${element.score}`;
     card.append(highScore);
   });
-
 
   // for (var i = 0; i < localStorage.length; i++) {
   //   var highName = localStorage.getItem("highscores")
@@ -215,6 +214,17 @@ function gameOver() {
   card.append(restart);
 }
 
-
+function allScores() {
+  var highScoresPage = document.getElementById("all-scores");
+  highScoresPage.addEventListener("click", function (event) {
+    card.innerHTML = "";
+    highScores.forEach((element) => {
+      var highScore = document.createElement("h2");
+      highScore.textContent = `${element.name} ${element.score}`;
+      card.append(highScore);
+    });
+  });
+}
 
 startGame();
+allScores();
