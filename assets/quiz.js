@@ -184,7 +184,8 @@ function gameOver() {
   restart.setAttribute("id", "restart");
 
   // add the content from the question key in the quizQuestions Object Array
-  p.textContent = "Game Over! Please enter your name!";
+  p.textContent =
+    "Game Over! Please enter your name! Click High Scores to see all scores";
   submit.textContent = "Submit!";
   restart.textContent = "Restart";
 
@@ -219,9 +220,16 @@ function allScores() {
   highScoresPage.addEventListener("click", function (event) {
     card.innerHTML = "";
     highScores.forEach((element) => {
-      var highScore = document.createElement("h2");
+      var highScore = document.createElement("h4");
       highScore.textContent = `${element.name} ${element.score}`;
       card.append(highScore);
+    });
+    var restart = document.createElement("button");
+    restart.setAttribute("id", "restart");
+    restart.textContent = "Restart";
+    card.append(restart);
+    restart.addEventListener("click", function (event) {
+      init();
     });
   });
 }
