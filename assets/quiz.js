@@ -219,10 +219,17 @@ function allScores() {
   highScoresPage.addEventListener("click", function (event) {
     card.innerHTML = "";
     highScores.forEach((element) => {
-      var highScore = document.createElement("h2");
+      var highScore = document.createElement("h4");
       highScore.textContent = `${element.name} ${element.score}`;
       card.append(highScore);
     });
+    var restart = document.createElement("button");
+    restart.setAttribute("id", "restart");
+    restart.textContent = "Restart";
+    card.append(restart);
+     restart.addEventListener("click", function (event) {
+       init();
+     });
   });
 }
 
