@@ -184,7 +184,8 @@ function gameOver() {
   restart.setAttribute("id", "restart");
 
   // add the content from the question key in the quizQuestions Object Array
-  p.textContent = "Game Over! Please enter your name!";
+  p.textContent =
+    "Game Over! Please enter your name! Click High Scores to see all scores";
   submit.textContent = "Submit!";
   restart.textContent = "Restart";
 
@@ -227,9 +228,9 @@ function allScores() {
     restart.setAttribute("id", "restart");
     restart.textContent = "Restart";
     card.append(restart);
-     restart.addEventListener("click", function (event) {
-       init();
-     });
+    restart.addEventListener("click", function (event) {
+      init();
+    });
   });
 }
 

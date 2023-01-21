@@ -69,4 +69,15 @@ button {
     gap: 1em;
     font-size: 24px;
     border-radius: 8px;
+    cursor: pointer;
+}
+
+#all-scores{
+    cursor: pointer;
+    border: solid;
+    padding: 5px;
+}
+
+h4{
+    margin: 2px;
 }
