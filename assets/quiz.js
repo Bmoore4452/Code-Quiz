@@ -106,10 +106,10 @@ function clickButton() {
   if (this.textContent !== quizQuestions[count].correctAnswer) {
     countdown -= 3;
     timerElement.textContent = countdown;
-    // var reaction2 = document.createElement("p");
-    // reaction2.textContent = "wrong";
-    // reaction2.setAttribute("id", "reaction2");
-    // card.appendChild(reaction2);
+    var reaction2 = document.createElement("p");
+    reaction2.textContent = "wrong";
+    reaction2.setAttribute("id", "reaction2");
+    card.appendChild(reaction2);
   }
 
   // var reaction = document.createElement("p");
@@ -136,6 +136,7 @@ function startTime() {
       // Clears interval
       clearInterval(time);
       // countdown = 60;
+      gameOver();
     }
   }, 1000);
 }
@@ -219,6 +220,10 @@ function allScores() {
   var highScoresPage = document.getElementById("all-scores");
   highScoresPage.addEventListener("click", function (event) {
     card.innerHTML = "";
+    var highTitle = document.createElement("h1");
+    highTitle.textContent = "High Scores";
+    highTitle.style.textDecoration = "underline";
+    card.append(highTitle);
     highScores.forEach((element) => {
       var highScore = document.createElement("h4");
       highScore.textContent = `${element.name} ${element.score}`;
