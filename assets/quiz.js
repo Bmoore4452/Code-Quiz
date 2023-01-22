@@ -3,6 +3,7 @@ var clickBtn = document.getElementById("button");
 var timerElement = document.querySelector("#countdown");
 var countdown = 60;
 var count = 0;
+var index = 0;
 var startScreen = [
   {
     instructions: "Please click the below to start the game.",
@@ -102,26 +103,17 @@ function renderQuestion() {
   }
 }
 
+// Checks for the corrects answer
 function clickButton() {
   if (this.textContent !== quizQuestions[count].correctAnswer) {
     countdown -= 3;
     timerElement.textContent = countdown;
-    var reaction2 = document.createElement("p");
-    reaction2.textContent = "wrong";
-    reaction2.setAttribute("id", "reaction2");
-    card.appendChild(reaction2);
   }
 
-  // var reaction = document.createElement("p");
-  // reaction.textContent = "correct";
-  // reaction.setAttribute("id", "reaction");
-  // card.appendChild(reaction);
-
   count++;
-  // console.log(index);
-  // console.log(count);
 
-  if (count === quizQuestions[count].answers.length) {
+  // checks if the last question has been answer and at the end of the game runs the gameOver function
+  if (index === quizQuestions[index].answers.length) {
     gameOver();
   } else {
     click();
@@ -143,6 +135,7 @@ function startTime() {
 
 function click() {
   renderQuestion();
+  index++;
 }
 
 function printScores() {
@@ -151,13 +144,6 @@ function printScores() {
     highScore.textContent = `${element.name} ${element.score}`;
     card.append(highScore);
   });
-
-  // for (var i = 0; i < localStorage.length; i++) {
-  //   var highName = localStorage.getItem("highscores")
-  //   // var score = localStorage[highName];
-
-  //   // highScore.innerHTML += `${score}`;
-  //   console.log(`${highName}:`);
 }
 
 function init() {
@@ -216,10 +202,12 @@ function gameOver() {
   card.append(restart);
 }
 
+// Prints all of the high scores to the screen from local storage
 function allScores() {
   var highScoresPage = document.getElementById("all-scores");
   highScoresPage.addEventListener("click", function (event) {
     card.innerHTML = "";
+    clearInterval(time);
     var highTitle = document.createElement("h1");
     highTitle.textContent = "High Scores";
     highTitle.style.textDecoration = "underline";
