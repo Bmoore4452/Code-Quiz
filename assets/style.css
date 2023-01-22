@@ -1,83 +1,87 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
 }
 
 #countdown {
-    text-align: center
+  text-align: center;
 }
 
 .container {
-    /* border: 3px solid; */
-    width: 100%;
-    height: auto;
-    /* background-color: lightgrey; */
+  border: 3px solid;
+  width: 100%;
+  height: auto;
+  background-color: lightgrey;
 }
 
-
-#card{
-    /* border: solid 3px; */
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-   
+#card {
+  /* border: solid 3px; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 p {
-    text-align: center;
-    justify-content: center;
-    margin: 50px;
-    font-weight: bold;
-    font-size: 1.3em;
+  text-align: center;
+  justify-content: center;
+  margin: 50px;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
-#high-scores{
-    text-align: left;
-    justify-content: left;
-    font-weight: bold;
-    font-size: 1.3em;
+#high-scores {
+  text-align: left;
+  justify-content: left;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
-#reaction{
-    color: green;
-    font-style: italic;
-    animation: hideAnimation 0s ease-in .5s;
-    animation-fill-mode: forwards;
+#reaction {
+  color: green;
+  font-style: italic;
+  animation: hideAnimation 0s ease-in 0.5s;
+  animation-fill-mode: forwards;
 }
 
-#reaction2{
-    color: rgb(226, 9, 9);
-    font-style: italic;
-    animation: hideAnimation 0s ease-in .5s;
-    animation-fill-mode: forwards;
+#reaction2 {
+  color: rgb(226, 9, 9);
+  font-style: italic;
+  animation: hideAnimation 0s ease-in 0.5s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes hideAnimation {
-    to {
-        visibility: hidden;
-        width: 0;
-        height: 0;
-    }
+  to {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
 }
 
 button {
-    margin: 10px;
-    gap: 1em;
-    font-size: 24px;
-    border-radius: 8px;
-    cursor: pointer;
+  margin: 10px;
+  gap: 1em;
+  font-size: 24px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-#all-scores{
-    cursor: pointer;
+#all-scores {
+  cursor: pointer;
+  border: solid;
+  padding: 5px;
+  background-color: lightgrey;
+}
+
+h4 {
+  margin: 2px;
+}
+
+.timer{
+    background-color: lightgrey;
     border: solid;
-    padding: 5px;
-}
-
-h4{
-    margin: 2px;
 }
